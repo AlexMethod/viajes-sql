@@ -123,6 +123,7 @@
             this.Name = "AgregarSucursal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AgregarSucursal";
+            this.Load += new System.EventHandler(this.AgregarSucursal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

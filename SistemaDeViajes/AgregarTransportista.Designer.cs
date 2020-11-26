@@ -147,6 +147,7 @@
             this.Name = "AgregarTransportista";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AgregarTransportista";
+            this.Load += new System.EventHandler(this.AgregarTransportista_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

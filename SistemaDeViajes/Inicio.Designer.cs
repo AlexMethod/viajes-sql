@@ -30,9 +30,9 @@ namespace SistemaDeViajes
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.ContentPanel = new System.Windows.Forms.Panel();
             this.btnPDF = new System.Windows.Forms.Button();
@@ -44,7 +44,9 @@ namespace SistemaDeViajes
             this.txtTitulo = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.HeaderPanel = new System.Windows.Forms.Panel();
+            this.cboIdioma = new System.Windows.Forms.ComboBox();
             this.MenuPanel = new System.Windows.Forms.Panel();
+            this.btnGraficas = new System.Windows.Forms.Button();
             this.btnHistorial = new System.Windows.Forms.Button();
             this.btnConfig = new System.Windows.Forms.Button();
             this.btnPedidos = new System.Windows.Forms.Button();
@@ -58,10 +60,10 @@ namespace SistemaDeViajes
             this.btnDash = new System.Windows.Forms.Button();
             this.LogoPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnGraficas = new System.Windows.Forms.Button();
             this.ContentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.graficaViajes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTabla)).BeginInit();
+            this.HeaderPanel.SuspendLayout();
             this.MenuPanel.SuspendLayout();
             this.LogoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -103,16 +105,16 @@ namespace SistemaDeViajes
             // 
             // graficaViajes
             // 
-            chartArea2.Name = "ChartArea1";
-            this.graficaViajes.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.graficaViajes.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.graficaViajes.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.graficaViajes.Legends.Add(legend4);
             this.graficaViajes.Location = new System.Drawing.Point(33, 136);
             this.graficaViajes.Name = "graficaViajes";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.graficaViajes.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.graficaViajes.Series.Add(series4);
             this.graficaViajes.Size = new System.Drawing.Size(343, 277);
             this.graficaViajes.TabIndex = 21;
             this.graficaViajes.Text = "chart1";
@@ -209,12 +211,26 @@ namespace SistemaDeViajes
             // HeaderPanel
             // 
             this.HeaderPanel.BackColor = System.Drawing.Color.Crimson;
+            this.HeaderPanel.Controls.Add(this.cboIdioma);
             this.HeaderPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.HeaderPanel.Location = new System.Drawing.Point(0, 0);
             this.HeaderPanel.Margin = new System.Windows.Forms.Padding(2);
             this.HeaderPanel.Name = "HeaderPanel";
             this.HeaderPanel.Size = new System.Drawing.Size(786, 48);
             this.HeaderPanel.TabIndex = 0;
+            // 
+            // cboIdioma
+            // 
+            this.cboIdioma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboIdioma.FormattingEnabled = true;
+            this.cboIdioma.Items.AddRange(new object[] {
+            "English",
+            "Español"});
+            this.cboIdioma.Location = new System.Drawing.Point(653, 12);
+            this.cboIdioma.Name = "cboIdioma";
+            this.cboIdioma.Size = new System.Drawing.Size(121, 21);
+            this.cboIdioma.TabIndex = 23;
+            this.cboIdioma.SelectedIndexChanged += new System.EventHandler(this.cboIdioma_SelectedIndexChanged);
             // 
             // MenuPanel
             // 
@@ -238,6 +254,22 @@ namespace SistemaDeViajes
             this.MenuPanel.Name = "MenuPanel";
             this.MenuPanel.Size = new System.Drawing.Size(140, 484);
             this.MenuPanel.TabIndex = 1;
+            // 
+            // btnGraficas
+            // 
+            this.btnGraficas.BackColor = System.Drawing.Color.Crimson;
+            this.btnGraficas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGraficas.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGraficas.ForeColor = System.Drawing.Color.White;
+            this.btnGraficas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnGraficas.Location = new System.Drawing.Point(2, 422);
+            this.btnGraficas.Margin = new System.Windows.Forms.Padding(0);
+            this.btnGraficas.Name = "btnGraficas";
+            this.btnGraficas.Size = new System.Drawing.Size(136, 28);
+            this.btnGraficas.TabIndex = 16;
+            this.btnGraficas.Text = "Gráficas";
+            this.btnGraficas.UseVisualStyleBackColor = false;
+            this.btnGraficas.Click += new System.EventHandler(this.btnGraficas_Click);
             // 
             // btnHistorial
             // 
@@ -437,22 +469,6 @@ namespace SistemaDeViajes
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // btnGraficas
-            // 
-            this.btnGraficas.BackColor = System.Drawing.Color.Crimson;
-            this.btnGraficas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGraficas.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGraficas.ForeColor = System.Drawing.Color.White;
-            this.btnGraficas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnGraficas.Location = new System.Drawing.Point(2, 422);
-            this.btnGraficas.Margin = new System.Windows.Forms.Padding(0);
-            this.btnGraficas.Name = "btnGraficas";
-            this.btnGraficas.Size = new System.Drawing.Size(136, 28);
-            this.btnGraficas.TabIndex = 16;
-            this.btnGraficas.Text = "Gráficas";
-            this.btnGraficas.UseVisualStyleBackColor = false;
-            this.btnGraficas.Click += new System.EventHandler(this.btnGraficas_Click);
-            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -471,6 +487,7 @@ namespace SistemaDeViajes
             this.ContentPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.graficaViajes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTabla)).EndInit();
+            this.HeaderPanel.ResumeLayout(false);
             this.MenuPanel.ResumeLayout(false);
             this.LogoPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -529,5 +546,7 @@ namespace SistemaDeViajes
         private System.Windows.Forms.DataVisualization.Charting.Chart graficaViajes;
         private System.Windows.Forms.Button btnPDF;
         private System.Windows.Forms.Button btnGraficas;
+        private string Culture = "en-US";
+        private System.Windows.Forms.ComboBox cboIdioma;
     }
 }

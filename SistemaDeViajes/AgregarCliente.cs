@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaDeViajes.Clases;
+using SistemaDeViajes.Resources;
+using System.Threading;
+using System.Globalization;
 
 namespace SistemaDeViajes
 {
@@ -20,9 +23,33 @@ namespace SistemaDeViajes
             InitializeComponent();
         }
 
+        
+
+        private void CargaLabels()
+        {
+
+
+            ActualizaCulture();
+            label2.Text = Strings.RazonSocial;
+            label1.Text = Strings.NombreComercial;
+            label3.Text = Strings.Tipo;
+            label5.Text = Strings.PorcentajeVenta;
+            label4.Text = Strings.Direccion;
+            btnGuardarCliente.Text = Strings.Guardar;
+            btnCerrarModal.Text = Strings.Cerrar;
+        }
+
+        private void ActualizaCulture()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
+        }
+
         private void Agregar_Load(object sender, EventArgs e)
         {
             cboTipo.Text = "Fiscal";
+            CargaLabels();
+            
         }
 
         private void btnCerrarModal_Click(object sender, EventArgs e)

@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaDeViajes.Clases;
+using SistemaDeViajes.Resources;
+using System.Threading;
+using System.Globalization;
 
 namespace SistemaDeViajes
 {
@@ -20,9 +23,28 @@ namespace SistemaDeViajes
             InitializeComponent();
         }
 
+        private void CargaLabels()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
+            label1.Text = Strings.EstadoDestino;
+            label2.Text = Strings.EstadoOrigen;
+            label3.Text = Strings.CPOrigen;
+            label5.Text = Strings.CPDestino;
+            label4.Text = Strings.Kilometros;
+            btnGuardarRuta.Text = Strings.Guardar;
+            btnCerrarModal.Text = Strings.Cerrar;
+        }
+
+        private void ActualizaCulture()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
+        }
+
         private void AgregarRuta_Load(object sender, EventArgs e)
         {
-
+            CargaLabels();
         }
 
         private void btnGuardarRuta_Click(object sender, EventArgs e)

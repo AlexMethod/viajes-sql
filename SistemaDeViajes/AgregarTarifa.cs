@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaDeViajes.Clases;
+using SistemaDeViajes.Resources;
+using System.Threading;
+using System.Globalization;
 
 namespace SistemaDeViajes
 {
@@ -20,6 +23,24 @@ namespace SistemaDeViajes
             InitializeComponent();
         }
 
+        private void CargaLabels()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
+            label4.Text = Strings.Ruta;
+            label1.Text = Strings.Unidad;
+            label2.Text = Strings.ClienteFiscal;
+
+            btnGuardarTarifa.Text = Strings.Guardar;
+            btnCerrarModal.Text = Strings.Cerrar;
+        }
+
+        private void ActualizaCulture()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
+        }
+
         private void AgregarTarifa_Load(object sender, EventArgs e)
         {
             txtPrecioACliente.Visible = false;
@@ -30,7 +51,7 @@ namespace SistemaDeViajes
                 bindCboUnidades();
                 bindCboClientesFiscales();
             }
-            
+            CargaLabels();
         }
 
         private void btnGuardarTarifa_Click(object sender, EventArgs e)

@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaDeViajes.Clases;
+using SistemaDeViajes.Resources;
+using System.Threading;
+using System.Globalization;
 
 namespace SistemaDeViajes
 {
@@ -18,6 +21,26 @@ namespace SistemaDeViajes
             FormInicio = inicio;
             Accion = "ALTA";
             InitializeComponent();
+        }
+
+        private void CargaLabels()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
+            label4.Text = Strings.Ruta;
+            label1.Text = Strings.Sucursal;
+            label3.Text = Strings.Folio;
+            label5.Text = Strings.PesoTotal;
+            label2.Text = Strings.Pedidos;
+
+            btnGuardarViaje.Text = Strings.Guardar;
+            btnCerrarModal.Text = Strings.Cerrar;
+        }
+
+        private void ActualizaCulture()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
         }
 
         public void bindCboRutas()
@@ -98,8 +121,8 @@ namespace SistemaDeViajes
                 bindCboSucursales();
                 bindListPedidos();
             }
-            
-            
+
+            CargaLabels();
         }
 
         private void btnCerrarModal_Click(object sender, EventArgs e)

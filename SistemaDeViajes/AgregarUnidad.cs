@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaDeViajes.Clases;
+using SistemaDeViajes.Resources;
+using System.Threading;
+using System.Globalization;
 
 namespace SistemaDeViajes
 {
@@ -18,6 +21,25 @@ namespace SistemaDeViajes
             FormInicio = inicio;
             Accion = "ALTA";
             InitializeComponent();
+        }
+
+        private void CargaLabels()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
+            label2.Text = Strings.Nombre;
+            label1.Text = Strings.Placas;
+            label3.Text = Strings.PesoMaximo;
+            label5.Text = Strings.CostoxKilometro;
+            label4.Text = Strings.Transportista;
+            btnGuardarUnidad.Text = Strings.Guardar;
+            btnCerrarModal.Text = Strings.Cerrar;
+        }
+
+        private void ActualizaCulture()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
         }
 
         private void btnGuardarUnidad_Click(object sender, EventArgs e)
@@ -128,7 +150,8 @@ namespace SistemaDeViajes
             {
                 bindCboTransportistas();
             }
-            
+            CargaLabels();
+
         }
 
         private void txtCostoKilometro_TextChanged(object sender, EventArgs e)

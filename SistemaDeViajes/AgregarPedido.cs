@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaDeViajes.Clases;
+using SistemaDeViajes.Resources;
+using System.Threading;
+using System.Globalization;
+
 namespace SistemaDeViajes
 {
     public partial class AgregarPedido : Form
@@ -17,6 +21,26 @@ namespace SistemaDeViajes
             FormInicio = inicio;
             Accion = "ALTA";
             InitializeComponent();
+        }
+
+        private void CargaLabels()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
+            label2.Text = Strings.ClienteOrigen;
+            label1.Text = Strings.ClienteDestino;
+            label3.Text = Strings.Pedido;
+            label5.Text = Strings.Peso;
+            label4.Text = Strings.Piezas;
+
+            btnGuardarPedido.Text = Strings.Guardar;
+            btnCerrarModal.Text = Strings.Cerrar;
+        }
+
+        private void ActualizaCulture()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(FormInicio.GetCulture());
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(FormInicio.GetCulture());
         }
 
         public void Show(Pedido pedido, string accion)
@@ -56,6 +80,7 @@ namespace SistemaDeViajes
         private void AgregarPedido_Load(object sender, EventArgs e)
         {
             bindCboClientes();
+            CargaLabels();
         }
 
         public void bindCboClientes()

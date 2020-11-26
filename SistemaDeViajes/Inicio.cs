@@ -14,6 +14,9 @@ using iTextSharp;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using SistemaDeViajes.Resources;
+using System.Threading;
+using System.Globalization;
 
 namespace SistemaDeViajes
 {
@@ -25,19 +28,84 @@ namespace SistemaDeViajes
             ConnectionSQL = connectionSql;
         }
 
+        public string GetCulture() { return Culture; }
+
         private void Inicio_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
 
+        private void CargaLabels()
+        {
+            //btnDash.Text = 
+
+            //en-US
+            //es-MX
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(Culture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Culture);
+            CargaTitulo();
+            btnClientes.Text = Strings.Clientes;
+            btnSucursales.Text = Strings.Sucursales;
+            btnUnidades.Text = Strings.Unidades;
+            btnTransportistas.Text = Strings.Transportistas;
+            btnRutas.Text = Strings.Rutas;
+            btnTarifas.Text = Strings.Tarifas;
+            btnViajes.Text = Strings.Viajes;
+            btnPedidos.Text = Strings.Pedidos;
+            btnHistorial.Text = Strings.Historial_viaje;
+
+            btnAgregar.Text = Strings.Agregar;
+            btnEditar.Text = Strings.Editar;
+            btnEliminar.Text = Strings.Eliminar;
+            btnEstatusViaje.Text = Strings.EstatusViaje;
+
+        }
+
+        private void CargaTitulo()
+        {
+            switch (CatalogoActual)
+            {
+                case "CLIENTES":
+                    txtTitulo.Text = Strings.ClientesUpper;
+                    break;
+                case "SUCURSALES":
+                    txtTitulo.Text = Strings.SucursalesUpper;
+                    break;
+                case "UNIDADES":
+                    txtTitulo.Text = Strings.UnidadesUpper;
+                    break;
+                case "TRANSPORTISTAS":
+                    txtTitulo.Text = Strings.TransportistasUpper;
+                    break;
+                case "RUTAS":
+                    txtTitulo.Text = Strings.RutasUpper;
+                    break;
+                case "TARIFAS":
+                    txtTitulo.Text = Strings.TarifasUpper;
+                    break;
+                case "VIAJES":
+                    txtTitulo.Text = Strings.ViajesUpper;
+                    break;
+                case "PEDIDOS":
+                    txtTitulo.Text = Strings.PedidosUpper;
+                    break;
+                case "HISTORIAL_VIAJE":
+                    txtTitulo.Text = Strings.Historial_viajeUpper;
+                    break;
+            }
+        }
+
         private void Inicio_Load(object sender, EventArgs e)
         {
+            cboIdioma.Text = "English";
             btnEstatusViaje.Visible = false;
             btnAgregar.Visible = false;
             btnEditar.Visible = false;
             btnEliminar.Visible = false;
             graficaViajes.Visible = false;
             dgTabla.Visible = true;
+
+            CargaLabels();
 
         }
 
@@ -50,7 +118,7 @@ namespace SistemaDeViajes
             graficaViajes.Visible = false;
             dgTabla.Visible = true;
             CatalogoActual = "CLIENTES";
-            txtTitulo.Text = "CLIENTES";
+            txtTitulo.Text = Strings.ClientesUpper;
             GetAllData("Informacion", "Cliente");
         }
 
@@ -64,7 +132,7 @@ namespace SistemaDeViajes
             dgTabla.Visible = true;
 
             CatalogoActual = "SUCURSALES";
-            txtTitulo.Text = "SUCURSALES";
+            txtTitulo.Text = Strings.SucursalesUpper;
             GetAllData("Informacion", "Sucursal");
         }
 
@@ -78,7 +146,7 @@ namespace SistemaDeViajes
             dgTabla.Visible = true;
 
             CatalogoActual = "UNIDADES";
-            txtTitulo.Text = "UNIDADES";
+            txtTitulo.Text = Strings.UnidadesUpper;
             GetAllData("Informacion", "View_Unidad");
         }
 
@@ -92,7 +160,7 @@ namespace SistemaDeViajes
             dgTabla.Visible = true;
 
             CatalogoActual = "TRANSPORTISTAS";
-            txtTitulo.Text = "TRANSPORTISTAS";
+            txtTitulo.Text = Strings.TransportistasUpper;
             GetAllData("Informacion", "Transportista");
         }
 
@@ -107,7 +175,7 @@ namespace SistemaDeViajes
 
 
             CatalogoActual = "RUTAS";
-            txtTitulo.Text = "RUTAS";
+            txtTitulo.Text = Strings.RutasUpper;
             GetAllData("Informacion", "Ruta");
         }
 
@@ -120,7 +188,7 @@ namespace SistemaDeViajes
             graficaViajes.Visible = false;
             dgTabla.Visible = true;
             CatalogoActual = "TARIFAS";
-            txtTitulo.Text = "TARIFAS";
+            txtTitulo.Text = Strings.TarifasUpper;
             GetAllData("Operacion", "View_Tarifa");
         }
 
@@ -133,7 +201,7 @@ namespace SistemaDeViajes
             graficaViajes.Visible = false;
             dgTabla.Visible = true;
             CatalogoActual = "VIAJES";
-            txtTitulo.Text = "VIAJES";
+            txtTitulo.Text = Strings.ViajesUpper;
             GetAllData("Operacion", "View_Viaje");
         }
 
@@ -146,7 +214,7 @@ namespace SistemaDeViajes
             graficaViajes.Visible = false;
             dgTabla.Visible = true;
             CatalogoActual = "PEDIDOS";
-            txtTitulo.Text = "PEDIDOS";
+            txtTitulo.Text = Strings.PedidosUpper;
             GetAllData("Operacion", "View_Pedido");
         }
 
@@ -159,7 +227,7 @@ namespace SistemaDeViajes
             graficaViajes.Visible = false;
             dgTabla.Visible = true;
             CatalogoActual = "HISTORIAL";
-            txtTitulo.Text = "HISTORIAL VIAJES";
+            txtTitulo.Text = Strings.Historial_viajeUpper;
             GetAllData("Operacion", "View_HistorialViajes");
         }
 
@@ -241,7 +309,7 @@ namespace SistemaDeViajes
                     modalAgregarPedido.Show();
                     break;
                 case "VIAJES":
-                    if (modalAgregarTarifa == null || (modalAgregarViaje != null && modalAgregarViaje.IsDisposed)) modalAgregarViaje = new AgregarViaje(this);
+                    if (modalAgregarViaje == null || (modalAgregarViaje != null && modalAgregarViaje.IsDisposed)) modalAgregarViaje = new AgregarViaje(this);
                     modalAgregarViaje.Show();
                     break;
                 case "HISTORIAL":
@@ -1867,6 +1935,22 @@ namespace SistemaDeViajes
             doc.Close();
             writer.Close();
             fs.Close();
+        }
+
+        private void cboIdioma_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string idioma = cboIdioma.Text;
+            if(idioma == "English")
+            {
+                Culture = "en-US";
+            }
+            else if(idioma == "Español")
+            {
+                Culture = "es";
+            }
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(Culture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Culture);
+            CargaLabels();
         }
     }
 }
